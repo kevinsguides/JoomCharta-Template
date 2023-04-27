@@ -11,7 +11,6 @@
 @import "colormodes";
 
 
-//Your CSS Here
 a{
     color: var(--bs-link);
 }
@@ -20,14 +19,35 @@ a:hover{
 }
 
 
+// sidebar modules
+.jc-mod-box{
+    background-color: var(--jc-main-bg);
+    border: 1px solid var(--bs-border-color);
+    margin-bottom: 1rem;
+    .jc-box-header{
+        padding: 1rem;
+        width: 100%;
+        background-color: var(--jc-main-bg);
+        border-bottom: 1px solid var(--bs-border-color);
+        color: var(--jc-main-color);
+        display: block;
+    }
+    .jc-box-body{
+        padding: 1rem;
+    }
+}
+
+//base layout
+
 main{
     background: var(--jc-main-bg);
+    padding: 1rem;
+    border: 1px solid var(--bs-border-color);
 }
 
 .container-fullsite{
-    background: var(--jc-main-bg);
+    background: var(--jc-container-bg);
 }
-
 
 //Basic Responsive Images
 img{

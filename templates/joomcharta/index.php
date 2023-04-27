@@ -127,6 +127,26 @@ if($support_layout_ultrawide == 0){
     $wa->addInlineStyle('.container{max-width: 1320px;}');
 }
 
+
+
+//figure out sidebar / overall layout stuff
+$showsidebar = false;
+$layout_main_cols = 12;
+$layout_main_order = 1;
+$layout_sidebar_order = 2;
+
+$sidebar = $this->countModules('sidebar');
+$sidebar_position = $this->params->get('sidebar_position', 'right');
+if($this->countModules('sidebar')){
+    $showsidebar = true;
+    $layout_main_cols = 9;
+    if(($sidebar_position) == 'left'){
+        $layout_sidebar_order = 1;
+        $layout_main_order = 2;
+    }
+}
+
+
 //Set viewport
 $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
 
@@ -143,8 +163,7 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
 <body class="site">
 <div class="container p-0 container-fullsite">
 	<header class="bg-light pt-3">
-
-        <a href="" class="fs-1 text-decoration-none"><?php echo ($sitename); ?></a>
+        <div class="top-branding p-3"><a href="" class="fs-1 text-decoration-none"><?php echo ($sitename); ?></a></div>
         <!-- Generate a Bootstrap Navbar for the top of our website and put the site title on it -->
         <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
             <div class="container-fluid">
@@ -174,36 +193,25 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
         
     </header>
 
-    <!-- Generate the main content area of the website -->
-    <div class="siteBody <?php echo $pageclass; ?>">
-       
-
-            <div class="row gx-0">
-                <!-- Use a BootStrap grid to load main content on left, sidebar on right IF sidebar exists -->
-                <?php if ($this->countModules('sidebar')) : ?>
-                <div class="col-xs-12 col-lg-8">
-
-                    <main>
-                        <!-- Load important Joomla system messages -->
-                        <jdoc:include type="message" />
-                        <!-- Load the main component of the webpage -->
-                        <jdoc:include type="component" />
-                    </main>
-                </div>
-                <!-- Load the sidebar if one exists -->
-                <div class="col-xs-12 col-lg-4">
-                        <!-- This line tells Joomla to load the "sidebar" module position with the "superBasicMod" mod chrome as the default (see html/layouts/chromes folder)-->
-                        <jdoc:include type="modules" name="sidebar" style="superBasicMod" />
-                </div>
-                <!-- If there's no sidebar, just load the component with no sidebar-->
-                <?php else: ?>
-                    <!-- Load the main component of the webpage -->
-                    <main>
-                        <jdoc:include type="component" />
-                    </main>
-                <?php endif; ?>
+    <div class="row gx-0">
+        <div class="col-12 col-lg-<?php echo $layout_main_cols;?> order-<?php echo $layout_main_order;?> ">
+        <div class="p-0 p-md-1 p-lg-2">
+            <main class="<?php echo $pageclass; ?>">
+                <jdoc:include type="message" />
+                <jdoc:include type="component" />
+            </main>
+        </div>
+        </div>
+        <?php if ($showsidebar) : ?>
+            <div class="col-12 col-lg-3 order-<?php echo $layout_sidebar_order;?>">
+            <div class="p-0 p-md-1 p-lg-2">
+            <aside>
+                <jdoc:include type="modules" name="sidebar" style="block" />
+            </aside>
             </div>
-     
+            </div>
+        <?php endif; ?>
+
     </div>
 
     <!-- Load Footer -->

@@ -28,7 +28,9 @@
 		<position>search</position>
 		<position>breadcrumbs</position>
 		<position>menu</position>
-		<position>content-top</position>
+		<position>contenttop</position>
+		<position>logindialog</position>
+		<position>hero</position>
 	</positions>
 	<languages folder="language">
 		<language tag="en-GB">en-GB/tpl_joomcharta.ini</language>
