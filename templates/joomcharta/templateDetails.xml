@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="template" client="site" method="upgrade">
+	<name>joomcharta</name>
+	<version>1.21</version>
+	<creationDate>April 2023</creationDate>
+	<author>Your Name</author>
+	<authorEmail>Your Email</authorEmail>
+	<copyright>(C) 2023 KG</copyright>
+	<description>TPL_JOOMCHARTA_XML_DESCRIPTION</description>
+	<inheritable>1</inheritable>
+	<files>
+		<filename>index.php</filename>
+		<filename>joomla.asset.json</filename>
+		<filename>templateDetails.xml</filename>
+		<folder>html</folder>
+		<folder>language</folder>
+	</files>
+	<media destination="templates/site/joomcharta" folder="media">
+		<folder>js</folder>
+		<folder>css</folder>
+		<folder>scss</folder>
+		<folder>images</folder>
+	</media>
+	<positions>
+		<position>header</position>
+		<position>footer</position>
+		<position>sidebar</position>
+		<position>search</position>
+		<position>breadcrumbs</position>
+		<position>menu</position>
+		<position>content-top</position>
+	</positions>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/tpl_joomcharta.ini</language>
+		<language tag="en-GB">en-GB/tpl_joomcharta.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="advanced">
+				<field
+					name="testparam"
+					type="radio"
+					label="TPL_JOOMCHARTA_TEST_LABEL"
+					default="1"
+					layout="joomla.form.field.radio.switcher"
+					filter="boolean"
+					>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
