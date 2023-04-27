@@ -34,33 +34,105 @@ $sitename = htmlspecialchars($app->get('sitename'), ENT_QUOTES, 'UTF-8');
 $menu     = $app->getMenu()->getActive();
 $pageclass = $menu !== null ? $menu->getParams()->get('pageclass_sfx', '') : '';
 
-//Get params from template styling
-//If you want to add your own parameters you may do so in templateDetails.xml
-$testparam =  $this->params->get('testparam');
 
-//uncomment to see how this works on site... it just shows 1 or 0 depending on option selected in style config.
-//You can use this style to get/set any param according to instructions at https://kevinsguides.com/guides/webdev/joomla4/joomla-4-templates/adding-config
-//echo('the value of testparam is: '.$testparam);
+
+
+//convert hex to rgb
+function toRGB($hex){
+    $hex = str_replace("#", "", $hex);
+    if(strlen($hex) == 3){
+        $r = hexdec(substr($hex,0,1).substr($hex,0,1));
+        $g = hexdec(substr($hex,1,1).substr($hex,1,1));
+        $b = hexdec(substr($hex,2,1).substr($hex,2,1));
+    }else{
+        $r = hexdec(substr($hex,0,2));
+        $g = hexdec(substr($hex,2,2));
+        $b = hexdec(substr($hex,4,2));
+    }
+
+    return ($r . "," . $g . "," . $b);
+}
+
+function brightenRGB($rgb, $amount){
+    $rgb = explode(",", $rgb);
+    $r = $rgb[0];
+    $g = $rgb[1];
+    $b = $rgb[2];
+
+    $r = $r + $amount;
+    $g = $g + $amount;
+    $b = $b + $amount;
+
+    if($r > 255){
+        $r = 255;
+    }
+    if($g > 255){
+        $g = 255;
+    }
+    if($b > 255){
+        $b = 255;
+    }
+
+    return ($r . "," . $g . "," . $b);
+
+}
+
+
+//Get params from template styling
+$support_layout_ultrawide =  $this->params->get('layout_ultrawide', 0);
+$color_scheme = $this->params->get('color_scheme', 'default');
+$color_mode = $this->params->get('color_mode', 'light');
+
+
+$set_color_mode = $color_mode;
+if($color_mode == 'user'){
+    //if user color mode, we'll start with dark then make it light later if needed
+    $set_color_mode = 'dark';
+}
+
+if($color_scheme == 'custom'){
+    $color_primary = $this->params->get('color_primary', '#003121');
+    $color_primary_rgb = toRGB($color_primary);
+    $wa->addInlineStyle(':root{--bs-primary: '. $color_primary .';}');
+    $wa->addInlineStyle(':root{--bs-primary-rgb: '. $color_primary_rgb .';}');
+    $color_secondary = $this->params->get('color_secondary', '#3a424d');
+    $color_secondary_rgb = toRGB($color_secondary);
+    $wa->addInlineStyle(':root{--bs-secondary: '. $color_secondary .';}');
+    $wa->addInlineStyle(':root{--bs-secondary-rgb: '. $color_secondary_rgb .';}');
+    $color_link = $this->params->get('color_link', '#0d6efd');
+    $color_link_rgb = toRGB($color_link);
+    $wa->addInlineStyle(':root{--bs-link: '. $color_link .';}');
+    $wa->addInlineStyle(':root{--bs-link-rgb: '. $color_link_rgb .';}');
+
+    //calculate link-hover color as link-color + 20% brightness
+    $color_link_hover = brightenRGB($color_link_rgb, 51);
+    $wa->addInlineStyle(':root{--bs-link-hover: '. $color_link_hover .';}');
+}
+
+
 
 // Get this template's path
 $templatePath = 'templates/' . $this->template;
 
 //load bootstrap collapse js (required for mobile menu to work)
-//this loads collapse.min.js from media/vendor/bootstrap/js - you can check out that folder to see what other bootstrap js files are available if you need them
 HTMLHelper::_('bootstrap.collapse');
 
 
 //Register our web assets (Css/JS)
-$wa->useStyle('template.j4starter.mainstyles');
-$wa->useStyle('template.j4starter.user');
-$wa->useScript('template.j4starter.scripts');
+$wa->useStyle('template.joomcharta.mainstyles');
+$wa->useStyle('template.joomcharta.user');
+$wa->useScript('template.joomcharta.scripts');
+
+if($support_layout_ultrawide == 0){
+    $wa->addInlineStyle('.container{max-width: 1320px;}');
+}
 
 //Set viewport
 $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
 
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
+<html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>" data-bs-theme="<?php echo $set_color_mode;?>">
 <head>
 	<jdoc:include type="metas" />
 	<jdoc:include type="styles" />
@@ -68,13 +140,14 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
     
 </head>
 
-<body class="site <?php echo $pageclass; ?>">
-	<header>
+<body class="site">
+<div class="container p-0 container-fullsite">
+	<header class="bg-light pt-3">
+
+        <a href="" class="fs-1 text-decoration-none"><?php echo ($sitename); ?></a>
         <!-- Generate a Bootstrap Navbar for the top of our website and put the site title on it -->
-        <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+        <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
             <div class="container-fluid">
-                <a href="" class="navbar-brand"><?php echo ($sitename); ?></a>
-                <!-- Update 1.14 - Added support for mobile menu with bootstrap-->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -85,24 +158,27 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
                 <?php endif; ?>
             </div>
         </nav>
+                    <!-- Load Breadcrumbs Module if Module Exists -->
+                    <?php if ($this->countModules('breadcrumbs')) : ?>
+                <div class="breadcrumbs bg-light">
+                    <jdoc:include type="modules" name="breadcrumbs" style="none" />
+                </div>
+            <?php endif; ?>
+
         <!-- Load Header Module if Module Exists -->
         <?php if ($this->countModules('header')) : ?>
             <div class="headerClasses">
                 <jdoc:include type="modules" name="header" style="none" />
             </div>
         <?php endif; ?>
+        
     </header>
 
     <!-- Generate the main content area of the website -->
-    <main class="siteBody">
-        <div class="container">
-            <!-- Load Breadcrumbs Module if Module Exists -->
-            <?php if ($this->countModules('breadcrumbs')) : ?>
-                <div class="breadcrumbs">
-                    <jdoc:include type="modules" name="breadcrumbs" style="none" />
-                </div>
-            <?php endif; ?>
-            <div class="row">
+    <div class="siteBody <?php echo $pageclass; ?>">
+       
+
+            <div class="row gx-0">
                 <!-- Use a BootStrap grid to load main content on left, sidebar on right IF sidebar exists -->
                 <?php if ($this->countModules('sidebar')) : ?>
                 <div class="col-xs-12 col-lg-8">
@@ -127,8 +203,8 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
                     </main>
                 <?php endif; ?>
             </div>
-        </div>
-    </main>
+     
+    </div>
 
     <!-- Load Footer -->
     <footer class="footer mt-auto py-3 bg-light">
@@ -141,5 +217,6 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
 
     <!-- Include any debugging info -->
 	<jdoc:include type="modules" name="debug" style="none" />
+</div>
 </body>
 </html>

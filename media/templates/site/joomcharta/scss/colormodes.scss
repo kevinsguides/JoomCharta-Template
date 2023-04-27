@@ -1,0 +1,24 @@
+//my defaults
+:root{
+    --light: #f8f9fa;
+    --bs-body-bg: #e2e2e2;
+    --jc-main-bg: #ffffff;
+
+}
+
+
+@include color-mode(dark) {
+    --light: #0e0e0e;
+    --bs-body-bg: #0a0a0a;
+    --jc-main-bg: #1c1c1c;
+}
+
+
+
+.bg-light{
+    background-color: var(--light) !important;
+}
+
+
+
+

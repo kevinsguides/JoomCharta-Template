@@ -36,17 +36,84 @@
 	</languages>
 	<config>
 		<fields name="params">
-			<fieldset name="advanced">
-				<field
-					name="testparam"
-					type="radio"
-					label="TPL_JOOMCHARTA_TEST_LABEL"
-					default="1"
-					layout="joomla.form.field.radio.switcher"
-					filter="boolean"
-					>
+			<fieldset name="style">
+
+			<field name="color_scheme"
+			type="list"
+			label="TPL_JOOMCHARTA_COLOR_SCHEME_LABEL"
+			description="TPL_JOOMCHARTA_COLOR_SCHEME_DESC"
+			default="default"
+			>
+			<option value="default">Default: Tealish</option>
+			<option value="custom">Use Custom</option>
+
+			</field>
+			<field
+			name="color_mode"
+			type="list"
+			label="TPL_JOOMCHARTA_COLOR_MODE_LABEL"
+			description="TPL_JOOMCHARTA_COLOR_MODE_DESC"
+			default="light"
+			>
+			<option value="light">Light</option>
+			<option value="dark">Dark</option>
+			<option value="user">User Preference*</option>
+			</field>
+
+			<field name="note_color_mode"
+			type="note"
+			label="TPL_JOOMCHARTA_COLOR_MODE_NOTE_LABEL"
+			description="TPL_JOOMCHARTA_COLOR_MODE_NOTE_DESC"
+			showon="color_mode:user"
+			/>
+
+			<field name="note_customcolors"
+			type="note"
+			label="TPL_JOOMCHARTA_CUSTOM_COLORS_LABEL"
+			description="TPL_JOOMCHARTA_CUSTOM_COLORS_DESC"
+			showon="color_scheme:custom"
+			/>
+
+				<field name="color_primary"
+				type="color"
+				label="TPL_JOOMCHARTA_COLOR_PRIMARY_LABEL"
+				description="TPL_JOOMCHARTA_COLOR_PRIMARY_DESC"
+				default="#003121"
+				showon="color_scheme:custom"
+				/>
+				<field name="color_secondary"
+				type="color"
+				label="TPL_JOOMCHARTA_COLOR_SECONDARY_LABEL"
+				description="TPL_JOOMCHARTA_COLOR_SECONDARY_DESC"
+				default="#3a424d"
+				showon="color_scheme:custom"
+				/>
+				<field name="color_link"
+				type="color"
+				label="TPL_JOOMCHARTA_COLOR_LINK_LABEL"
+				description="TPL_JOOMCHARTA_COLOR_LINK_DESC"
+				default="#016e4d"
+				showon="color_scheme:custom"
+				/>
+			</fieldset>
+			<fieldset name="layout">
+				<field name="layout_ultrawide"
+				type="radio"
+				label="TPL_JOOMCHARTA_LAYOUT_ULTRAWIDE_LABEL"
+				description="TPL_JOOMCHARTA_LAYOUT_ULTRAWIDE_DESC"
+				class="btn-group btn-group-yesno"
+				default="0">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
+				</field>
+				<field name="sidebar_position"
+				type="radio"
+				label="TPL_JOOMCHARTA_SIDEBAR_POSITION_LABEL"
+				description="TPL_JOOMCHARTA_SIDEBAR_POSITION_DESC"
+				class="btn-group"
+				default="right">
+				<option value="left">Left</option>
+				<option value="right">Right</option>
 				</field>
 			</fieldset>
 		</fields>

@@ -8,16 +8,25 @@
 
 // Import this file to make columns work in com_content
 @import "_modifiers";
-
-
-//Your Imports Here
+@import "colormodes";
 
 
 //Your CSS Here
+a{
+    color: var(--bs-link);
+}
+a:hover{
+    color: rgb(var(--bs-link-hover));
+}
 
 
+main{
+    background: var(--jc-main-bg);
+}
 
-
+.container-fullsite{
+    background: var(--jc-main-bg);
+}
 
 
 //Basic Responsive Images
