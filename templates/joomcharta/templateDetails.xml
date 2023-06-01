@@ -46,7 +46,7 @@
 			description="TPL_JOOMCHARTA_COLOR_SCHEME_DESC"
 			default="default"
 			>
-			<option value="default">Default: Tealish</option>
+			<option value="default">Default: Minty</option>
 			<option value="custom">Use Custom</option>
 
 			</field>
@@ -61,6 +61,18 @@
 			<option value="dark">Dark</option>
 			<option value="user">User Preference*</option>
 			</field>
+
+			<field name="color_mode_toggle"
+			type="radio"
+			label="TPL_JOOMCHARTA_COLOR_MODE_TOGGLE_LABEL"
+			description="TPL_JOOMCHARTA_COLOR_MODE_TOGGLE_DESC"
+			class="btn-group btn-group-yesno"
+			showon="color_mode:user"
+			default="1">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+
 
 			<field name="note_color_mode"
 			type="note"
@@ -116,6 +128,15 @@
 				default="right">
 				<option value="left">Left</option>
 				<option value="right">Right</option>
+				</field>
+			</fieldset>
+			<fieldset name="advanced">
+				<field name="colormode_toggler_method"
+				label="TPL_JOOMCHARTA_COLORTOGGLE_METHOD"
+				type="list"
+				default="javascript">
+				<option value="javascript">JavaScript</option>
+				<option value="php">PHP Session</option>
 				</field>
 			</fieldset>
 		</fields>

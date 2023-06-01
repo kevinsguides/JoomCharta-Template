@@ -1,19 +1,36 @@
 //my defaults
-:root{
-    --light: #f8f9fa;
+//this is the color file for the MINTY theme
+:root {
+    
+    --jc-primary: #007a51;
+    --jc-primary-dark: rgb(0, 82, 29);
+    --jc-light: #f8f9fa;
     --bs-body-bg: #e2e2e2;
     --jc-main-bg: #ffffff;
     --jc-container-bg: #eeeeee;
-
+    --jc-primary-inverse: #ffffff;
+    --jc-info: #aedfc6;
+    --jc-info-dark: #7dbfa0;
+    --jc-info-textcolor: #222222;
+    --jc-link-color: #007a51;
+    --jc-card-bg: #f2f8f5;
 }
 
 
-@include color-mode(dark) {
-    --light: #0e0e0e;
-    --bs-body-bg: #0a0a0a;
-    --jc-main-bg: #1c1c1c;
-    --jc-container-bg: #050505;
+[data-bs-theme="dark"]{
+    
+        --jc-light: #0e0e0e;
+        --bs-body-bg: #0a0a0a;
+        --jc-main-bg: #1c1c1c;
+        --jc-container-bg: #050505;
+        --jc-dark: #f5f5f5;
+        --jc-link-color: #84d4ba;
+        --jc-info-textcolor: #ffffff;
+        --jc-info: #0d3826;
+        --jc-card-bg: #131815;
+    
 }
+    
 
 
 
@@ -21,6 +38,26 @@
     background-color: var(--light) !important;
 }
 
+#dark-light-toggle{
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 9999;
+    img{
+        aspect-ratio: 1;
+    }
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
 
+#dark-light-toggle{
+    background: #131313;
+}
 
-
+//html selector with data data-bs-theme
+html[data-bs-theme="dark"]{
+    #dark-light-toggle{
+        background: #525252;
+    }
+}

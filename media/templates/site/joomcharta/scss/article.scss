@@ -1,0 +1,11 @@
+.com-content-article{
+    img{
+        display: block;
+    }
+
+    .article-full-img img{
+        width: 100%;
+        height: auto;
+        border: 5px solid var(--bs-border-color);
+    }
+}

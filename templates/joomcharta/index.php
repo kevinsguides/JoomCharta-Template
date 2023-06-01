@@ -82,13 +82,23 @@ function brightenRGB($rgb, $amount){
 $support_layout_ultrawide =  $this->params->get('layout_ultrawide', 0);
 $color_scheme = $this->params->get('color_scheme', 'default');
 $color_mode = $this->params->get('color_mode', 'light');
+$color_mode_toggle = $this->params->get('color_mode_toggle', 1);
 
 
 $set_color_mode = $color_mode;
+
 if($color_mode == 'user'){
     //if user color mode, we'll start with dark then make it light later if needed
     $set_color_mode = 'dark';
+    require_once 'includes/darklighttoggle.php';
+    $wa->useScript('template.joomcharta.darklighttoggle');
+
+    if (getColorMode() == 'light'){
+        $set_color_mode = 'light';
+    }
 }
+
+
 
 if($color_scheme == 'custom'){
     $color_primary = $this->params->get('color_primary', '#003121');
@@ -111,11 +121,14 @@ if($color_scheme == 'custom'){
 
 
 
+
+
 // Get this template's path
 $templatePath = 'templates/' . $this->template;
 
 //load bootstrap collapse js (required for mobile menu to work)
 HTMLHelper::_('bootstrap.collapse');
+HTMLHelper::_('bootstrap.dropdown');
 
 
 //Register our web assets (Css/JS)
@@ -172,7 +185,13 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
                 </button>
                 <!-- Put menu links in the navbar - main menu must be in the "menu" position!!! Only supports top level and 1 down, so no more than 1 level of child items-->
                 <?php if ($this->countModules('menu')): ?>
-                <div class="collapse navbar-collapse" id="mainmenu"><jdoc:include type="modules" name="menu" style="none" /></div>
+                <div class="collapse navbar-collapse" id="mainmenu">
+                    <jdoc:include type="modules" name="menu" style="none" />
+                    <?php if ($this->countModules('search')): ?>
+                        
+                        <jdoc:include type="modules" name="search" style="search" />
+                    <?php endif; ?>
+                </div>
 
                 <?php endif; ?>
             </div>
@@ -226,5 +245,12 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
     <!-- Include any debugging info -->
 	<jdoc:include type="modules" name="debug" style="none" />
 </div>
+<?php
+if($color_mode == 'user' && $color_mode_toggle == 1){
+    renderColorToggle();
+}
+
+?>
 </body>
 </html>
+

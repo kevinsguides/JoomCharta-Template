@@ -22,6 +22,12 @@
       "uri": "user.css"
     },
     {
+      "name": "template.joomcharta.darklighttoggle",
+      "description": "The JS needed for color toggle feature to work",
+      "type": "script",
+      "uri": "darklighttoggle.js"
+    },
+    {
       "name": "template.joomcharta.scripts",
       "description": "The file containing the javascript for this template.",
       "type": "script",
@@ -52,5 +58,6 @@
       "type": "style",
       "uri": "system/joomla-fontawesome.min.css"
     }
+
   ]
 }

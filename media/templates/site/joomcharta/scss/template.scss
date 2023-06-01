@@ -1,22 +1,25 @@
 //This is where you can edit your CSS, or better yet, create additional scss files and import them.
 //You can compile this to css using the command: sass template.scss:..\css\template.min.css --style compressed
+//root
+
 
 // Load our local copy of Bootstrap 5.1
 @import "vendor/bootstrap/functions";
 @import "vendor/bootstrap/variables";
 @import "vendor/bootstrap/bootstrap";
+@import "colormodes";
+@import "overrides";
+@import "article";
 
 // Import this file to make columns work in com_content
 @import "_modifiers";
-@import "colormodes";
 
 
-a{
-    color: var(--bs-link);
+body{
+    --bs-nav-link-color: #000000;
+
 }
-a:hover{
-    color: rgb(var(--bs-link-hover));
-}
+
 
 
 // sidebar modules
@@ -47,6 +50,18 @@ main{
 
 .container-fullsite{
     background: var(--jc-container-bg);
+}
+
+//search
+.jc-search-container{
+    .btn{
+        margin-left: 0.5rem !important;
+        background: var(--bs-dark);
+        border-radius: 0;
+    }
+    .btn:hover{
+        background: var(--bs-secondary);
+    }
 }
 
 //Basic Responsive Images
