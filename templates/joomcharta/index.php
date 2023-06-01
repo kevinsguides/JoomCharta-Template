@@ -34,6 +34,7 @@ $sitename = htmlspecialchars($app->get('sitename'), ENT_QUOTES, 'UTF-8');
 $menu     = $app->getMenu()->getActive();
 $pageclass = $menu !== null ? $menu->getParams()->get('pageclass_sfx', '') : '';
 
+include_once 'includes/header.php';
 
 
 
@@ -83,6 +84,8 @@ $support_layout_ultrawide =  $this->params->get('layout_ultrawide', 0);
 $color_scheme = $this->params->get('color_scheme', 'default');
 $color_mode = $this->params->get('color_mode', 'light');
 $color_mode_toggle = $this->params->get('color_mode_toggle', 1);
+$header_style = $this->params->get('header_style', 'title');
+$header_image = $this->params->get('header_image', '');
 
 
 $set_color_mode = $color_mode;
@@ -175,8 +178,8 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
 
 <body class="site">
 <div class="container p-0 container-fullsite">
-	<header class="bg-light pt-3">
-        <div class="top-branding p-3"><a href="" class="fs-1 text-decoration-none"><?php echo ($sitename); ?></a></div>
+	<header class="bg-light">
+       <?php renderHeader($header_style, $header_image, $sitename) ?>
         <!-- Generate a Bootstrap Navbar for the top of our website and put the site title on it -->
         <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
             <div class="container-fluid">

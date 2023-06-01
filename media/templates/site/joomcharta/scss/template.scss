@@ -8,17 +8,15 @@
 @import "vendor/bootstrap/variables";
 @import "vendor/bootstrap/bootstrap";
 @import "colormodes";
-@import "overrides";
+@import "forms";
+
 @import "article";
+
 
 // Import this file to make columns work in com_content
 @import "_modifiers";
 
 
-body{
-    --bs-nav-link-color: #000000;
-
-}
 
 
 
@@ -56,7 +54,7 @@ main{
 .jc-search-container{
     .btn{
         margin-left: 0.5rem !important;
-        background: var(--bs-dark);
+        background: #001308;
         border-radius: 0;
     }
     .btn:hover{
@@ -69,3 +67,6 @@ img{
     max-width: 100%;
     height: auto;
 }
+
+
+@import "overrides";

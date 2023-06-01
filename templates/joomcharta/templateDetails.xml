@@ -40,6 +40,25 @@
 		<fields name="params">
 			<fieldset name="style">
 
+			<field name="header_style"
+			type="list"
+			label="TPL_JOOMCHARTA_HEADER_STYLE_LABEL"
+			description="TPL_JOOMCHARTA_HEADER_STYLE_DESC"
+			default="title"
+			>
+			<option value="title">Use Site Title</option>
+			<option value="logo">Use Logo Image</option>
+			<option value="fullimg">Full Width Image</option>
+			</field>
+
+			<field name="header_image"
+			type="media"
+			label="TPL_JOOMCHARTA_HEADER_IMAGE_LABEL"
+			description="TPL_JOOMCHARTA_HEADER_IMAGE_DESC"
+			showon="header_style:fullimg,logo"
+			/>
+
+
 			<field name="color_scheme"
 			type="list"
 			label="TPL_JOOMCHARTA_COLOR_SCHEME_LABEL"
