@@ -40,6 +40,14 @@
 		<fields name="params">
 			<fieldset name="style">
 
+			<field name="favicon_image"
+			type="media"
+			label="TPL_JOOMCHARTA_FAVICON"
+			description="TPL_JOOMCHARTA_FAVICON_DESC"
+			
+			/>
+
+
 			<field name="header_style"
 			type="list"
 			label="TPL_JOOMCHARTA_HEADER_STYLE_LABEL"
@@ -149,15 +157,7 @@
 				<option value="right">Right</option>
 				</field>
 			</fieldset>
-			<fieldset name="advanced">
-				<field name="colormode_toggler_method"
-				label="TPL_JOOMCHARTA_COLORTOGGLE_METHOD"
-				type="list"
-				default="javascript">
-				<option value="javascript">JavaScript</option>
-				<option value="php">PHP Session</option>
-				</field>
-			</fieldset>
+			
 		</fields>
 	</config>
 </extension>

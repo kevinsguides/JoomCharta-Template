@@ -1,3 +1,9 @@
 li::marker{
     color: var(--jc-primary);
 }
+
+[data-bs-theme="dark"]{
+    li::marker{
+        color: var(--jc-primary-light);
+    }
+}

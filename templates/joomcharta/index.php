@@ -20,9 +20,6 @@ use Joomla\CMS\Uri\Uri;
 $app = Factory::getApplication();
 $wa  = $this->getWebAssetManager();
 
-// Add Favicon from images folder
-$this->addHeadLink(HTMLHelper::_('image', 'favicon.ico', '', [], true, 1), 'icon', 'rel', ['type' => 'image/x-icon']);
-
 
 // Detecting Active Variables
 $option   = $app->input->getCmd('option', '');
@@ -35,48 +32,10 @@ $menu     = $app->getMenu()->getActive();
 $pageclass = $menu !== null ? $menu->getParams()->get('pageclass_sfx', '') : '';
 
 include_once 'includes/header.php';
+$mediaPath = JURI::root() . 'media/templates/site/joomcharta/';
 
 
 
-//convert hex to rgb
-function toRGB($hex){
-    $hex = str_replace("#", "", $hex);
-    if(strlen($hex) == 3){
-        $r = hexdec(substr($hex,0,1).substr($hex,0,1));
-        $g = hexdec(substr($hex,1,1).substr($hex,1,1));
-        $b = hexdec(substr($hex,2,1).substr($hex,2,1));
-    }else{
-        $r = hexdec(substr($hex,0,2));
-        $g = hexdec(substr($hex,2,2));
-        $b = hexdec(substr($hex,4,2));
-    }
-
-    return ($r . "," . $g . "," . $b);
-}
-
-function brightenRGB($rgb, $amount){
-    $rgb = explode(",", $rgb);
-    $r = $rgb[0];
-    $g = $rgb[1];
-    $b = $rgb[2];
-
-    $r = $r + $amount;
-    $g = $g + $amount;
-    $b = $b + $amount;
-
-    if($r > 255){
-        $r = 255;
-    }
-    if($g > 255){
-        $g = 255;
-    }
-    if($b > 255){
-        $b = 255;
-    }
-
-    return ($r . "," . $g . "," . $b);
-
-}
 
 
 //Get params from template styling
@@ -102,25 +61,6 @@ if($color_mode == 'user'){
 }
 
 
-
-if($color_scheme == 'custom'){
-    $color_primary = $this->params->get('color_primary', '#003121');
-    $color_primary_rgb = toRGB($color_primary);
-    $wa->addInlineStyle(':root{--bs-primary: '. $color_primary .';}');
-    $wa->addInlineStyle(':root{--bs-primary-rgb: '. $color_primary_rgb .';}');
-    $color_secondary = $this->params->get('color_secondary', '#3a424d');
-    $color_secondary_rgb = toRGB($color_secondary);
-    $wa->addInlineStyle(':root{--bs-secondary: '. $color_secondary .';}');
-    $wa->addInlineStyle(':root{--bs-secondary-rgb: '. $color_secondary_rgb .';}');
-    $color_link = $this->params->get('color_link', '#0d6efd');
-    $color_link_rgb = toRGB($color_link);
-    $wa->addInlineStyle(':root{--bs-link: '. $color_link .';}');
-    $wa->addInlineStyle(':root{--bs-link-rgb: '. $color_link_rgb .';}');
-
-    //calculate link-hover color as link-color + 20% brightness
-    $color_link_hover = brightenRGB($color_link_rgb, 51);
-    $wa->addInlineStyle(':root{--bs-link-hover: '. $color_link_hover .';}');
-}
 
 
 
@@ -163,6 +103,8 @@ if($this->countModules('sidebar')){
 }
 
 
+$favico = $this->params->get('favicon_image', $mediaPath . 'images/defaultfavicon.png');
+
 //Set viewport
 $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
 
@@ -173,6 +115,14 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
 	<jdoc:include type="metas" />
 	<jdoc:include type="styles" />
 	<jdoc:include type="scripts" />
+    <link rel="icon" type="image/png" href="<?php echo $favico; ?>">
+    <?php 
+if($color_scheme == 'custom'){
+    include_once('includes/customcolors.php');
+    renderCustomColors($wa, $this->params);
+}
+
+?>
     
 </head>
 
@@ -214,6 +164,11 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
         <?php endif; ?>
         
     </header>
+
+    <?php if ($this->countModules('hero')): ?>
+                        
+        <jdoc:include type="modules" name="hero" style="none" />
+    <?php endif; ?>
 
     <div class="row gx-0">
         <div class="col-12 col-lg-<?php echo $layout_main_cols;?> order-<?php echo $layout_main_order;?> ">

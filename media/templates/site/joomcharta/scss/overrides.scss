@@ -9,3 +9,38 @@
 
     --bs-link-color-rgb: 100, 200, 150;
 }
+
+
+.btn-primary{
+    background-color: var(--jc-primary);
+    border-color: var(--jc-primary-dark);
+}
+
+.btn-primary:hover{
+    background-color: var(--jc-primary-dark);
+
+}
+
+a:hover{
+    color: var(--jc-primary-dark);
+}
+
+.btn-secondary{
+    background-color: var(--jc-secondary);
+    border-color: var(--jc-secondary-dark);
+}
+
+.text-primary
+{
+    color: var(--jc-primary);
+}
+
+.text-secondary
+{
+    color: var(--jc-secondary);
+}
+
+
+.btn-secondary:hover{
+    background-color: var(--jc-secondary-dark);
+}
