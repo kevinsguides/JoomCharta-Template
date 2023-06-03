@@ -62,16 +62,13 @@ if($color_mode == 'user'){
 
 
 
-
-
-
-
 // Get this template's path
 $templatePath = 'templates/' . $this->template;
 
 //load bootstrap collapse js (required for mobile menu to work)
 HTMLHelper::_('bootstrap.collapse');
 HTMLHelper::_('bootstrap.dropdown');
+
 
 
 //Register our web assets (Css/JS)
@@ -82,8 +79,6 @@ $wa->useScript('template.joomcharta.scripts');
 if($support_layout_ultrawide == 0){
     $wa->addInlineStyle('.container{max-width: 1320px;}');
 }
-
-
 
 //figure out sidebar / overall layout stuff
 $showsidebar = false;
@@ -107,6 +102,24 @@ $favico = $this->params->get('favicon_image', $mediaPath . 'images/defaultfavico
 
 //Set viewport
 $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
+
+// Figure out if we have a module published in the login dialog
+$loginModalButtonText = Text::_('TPL_JOOMCHARTA_LOGIN');
+if ($this->countModules('logindialog')) {
+    HTMLHelper::_('bootstrap.modal');
+
+    //check if user is logged in
+    $user = Factory::getApplication()->getIdentity();
+    if (!$user->guest) {
+        //get their username
+
+
+
+        $loginModalButtonText = Text::_('TPL_JOOMCHARTA_USERACCTDIALOG');
+        $loginModalButtonText .= ' ' . $user->username;
+    }
+
+}
 
 ?>
 <!DOCTYPE html>
@@ -156,11 +169,9 @@ if($color_scheme == 'custom'){
                 </div>
             <?php endif; ?>
 
-        <!-- Load Header Module if Module Exists -->
-        <?php if ($this->countModules('header')) : ?>
-            <div class="headerClasses">
-                <jdoc:include type="modules" name="header" style="none" />
-            </div>
+
+        <?php if ($this->countModules('logindialog')) : ?>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" href="#jcLoginModal" id="jcModalLoginToggle"><span class="icon-user icon-fw" aria-hidden="true"></span> <?php echo $loginModalButtonText; ?></button>
         <?php endif; ?>
         
     </header>
@@ -202,6 +213,29 @@ if($color_scheme == 'custom'){
 
     <!-- Include any debugging info -->
 	<jdoc:include type="modules" name="debug" style="none" />
+
+
+    <?php // Load Login Module Modal if Exists ?>
+    <?php if ($this->countModules('logindialog')) : ?>
+        <div class="modal" tabindex="-1" id="jcLoginModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><?php echo $loginModalButtonText; ?></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                        
+                        <jdoc:include type="modules" name="logindialog" style="none" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    <?php endif;?>
+
 </div>
 <?php
 if($color_mode == 'user' && $color_mode_toggle == 1){

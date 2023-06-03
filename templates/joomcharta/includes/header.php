@@ -34,6 +34,12 @@ function renderHeader($header_style, $header_image, $sitename){
 
         <?php
     }
+
+    if($header_style == "headerMod"){
+        ?>
+        <jdoc:include type="modules" name="header" style="none" />
+        <?php
+    }
     
 }
 

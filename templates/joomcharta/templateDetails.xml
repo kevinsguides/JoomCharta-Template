@@ -57,6 +57,7 @@
 			<option value="title">Use Site Title</option>
 			<option value="logo">Use Logo Image</option>
 			<option value="fullimg">Full Width Image</option>
+			<option value="headerMod">Use Header Position Module</option>
 			</field>
 
 			<field name="header_image"
