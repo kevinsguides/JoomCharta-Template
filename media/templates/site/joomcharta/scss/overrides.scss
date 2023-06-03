@@ -1,0 +1,11 @@
+.card{
+    background-color: var(--jc-card-bg);
+}
+
+[data-bs-theme="dark"]{
+    .text-primary{
+        --bs-primary-rgb: 60, 138, 111;
+    }
+
+    --bs-link-color-rgb: 100, 200, 150;
+}

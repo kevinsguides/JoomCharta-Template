@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 
 ?>
-<dd class="hits">
+<dd class="jc-article-detail-tag">
     <span class="icon-eye icon-fw" aria-hidden="true"></span>
     <meta itemprop="interactionCount" content="UserPageVisits:<?php echo $displayData['item']->hits; ?>">
     <?php echo Text::sprintf('COM_CONTENT_ARTICLE_HITS', $displayData['item']->hits); ?>

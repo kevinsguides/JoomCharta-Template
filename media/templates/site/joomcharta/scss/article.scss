@@ -9,3 +9,19 @@
         border: 5px solid var(--bs-border-color);
     }
 }
+
+
+.jc-article-detail-tag{
+    border: 1px solid var(--bs-secondary-bg);
+    padding: 0.25rem !important;
+    margin: 0.25rem;
+    background-color: var(--bs-tertiary-bg);
+}
+
+
+.tags.list-inline{
+    margin: 0;
+    display: inline-flex;
+    padding: 0.5rem;
+    border: 1px solid var(--bs-secondary-bg);
+}

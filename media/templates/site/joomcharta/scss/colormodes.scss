@@ -1,69 +1,41 @@
 //my defaults
 //this is the color file for the MINTY theme
 :root {
-    
-    --jc-primary: #007a51;
-    --jc-primary-dark: rgb(0, 82, 29);
-    --jc-light: #f8f9fa;
-    --bs-body-bg: #f5f3f3;
+
+    --jc-light: #f5f5f5;
+    --jc-white: #ffffff;
+    --jc-subtle: #f3f3f3;
+    --jc-container-bg: #fafafa;
+    --jc-body-bg: #e6e6e6;
+    --jc-card-bg: #ffffff;
     --jc-main-bg: #ffffff;
-    --jc-container-bg: #eeeeee;
-    --jc-primary-inverse: #ffffff;
-    --jc-info: #93f0f4;
-    --jc-info-dark: #6bc9cf;
-    --jc-info-textcolor: #222222;
-    --jc-link-color: #007a51;
-    --jc-card-bg: #f2f8f5;
-    --jc-secondary: #bdccee;
-    --jc-secondary-dark: #c5d9d0;
-    --jc-secondary-inverse: #252525;
-    --jc-success: #aedfc6;
-    --jc-success-dark: #6eb978;
-    --jc-success-inverse: #252525;
-    --jc-warning: #f5d7b5;
-    --jc-warning-dark: #ccb396;
-    --jc-warning-inverse: #252525;
-    --jc-danger: #f5b5b5;
-    --jc-danger-dark: #d18f8f;
-    --jc-danger-inverse: #252525;
+    --jc-primary: #043d29;
+    
 }
 
 
 [data-bs-theme="dark"]{
     
-        --jc-light: #0e0e0e;
-        --bs-body-bg: #0a0a0a;
-        --jc-main-bg: #1c1c1c;
-        --jc-container-bg: #050505;
-        --jc-dark: #f5f5f5;
-        --jc-link-color: #84d4ba;
-        --jc-info-textcolor: #ffffff;
-        --jc-info: #0d2a38;
-        --jc-card-bg: #131815;
-
-        --jc-secondary: #010d2c;
-        --jc-secondary-dark: #1c1c1c;
-        --jc-secondary-inverse: #ffffff;
-
-        --jc-success: #0d3826;
-        --jc-success-dark: #0e0e0e;
-        --jc-success-inverse: #ffffff;
-
-        --jc-warning: #79601d;
-        --jc-warning-dark: #1c1c1c;
-        --jc-warning-inverse: #ffffff;
-
-        --jc-danger: #5e1d1d;
-        --jc-danger-dark: #1c1c1c;
-        --jc-danger-inverse: #ffffff;
-
-
-
+    --jc-light: #131313;
+    --jc-white: #000000;
+    --jc-subtle: #2e2e2e;
+    --jc-container-bg: #131313;
+    --jc-body-bg: #000000;
+    --jc-card-bg: #131313;
+    --jc-main-bg: #202020;
+    --jc-primary: #3c8a6f;
     
+}
+
+body{
+    background-color: var(--jc-body-bg);
 }
     
 
 
+.bg-subtle{
+    background-color: var(--jc-subtle) !important;
+}
 
 .bg-light{
     background-color: var(--light) !important;

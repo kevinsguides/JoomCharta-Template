@@ -16,7 +16,7 @@ use Joomla\CMS\Router\Route;
 use Joomla\Component\Content\Site\Helper\RouteHelper;
 
 ?>
-<dd class="parent-category-name">
+<dd class="jc-article-detail-tag">
     <?php echo LayoutHelper::render('joomla.icon.iconclass', ['icon' => 'icon-folder icon-fw']); ?>
     <?php $title = $this->escape($displayData['item']->parent_title); ?>
     <?php if ($displayData['params']->get('link_parent_category') && !empty($displayData['item']->parent_id)) : ?>

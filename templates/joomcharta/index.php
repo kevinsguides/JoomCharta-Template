@@ -218,7 +218,7 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
     <div class="row gx-0">
         <div class="col-12 col-lg-<?php echo $layout_main_cols;?> order-<?php echo $layout_main_order;?> ">
         <div class="p-0 p-md-1 p-lg-2">
-            <main class="<?php echo $pageclass; ?>">
+            <main class="main-container <?php echo $pageclass; ?>">
                 <jdoc:include type="message" />
                 <jdoc:include type="component" />
             </main>
@@ -237,7 +237,7 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
     </div>
 
     <!-- Load Footer -->
-    <footer class="footer mt-auto py-3 bg-light">
+    <footer class="footer mt-auto py-3">
         <div class="container">
             <?php if ($this->countModules('footer')) : ?>
                 <jdoc:include type="modules" name="footer" style="none" />

@@ -23,7 +23,7 @@ defined('_JEXEC') or die;
     <?php if (!empty($this->lead_items)) : ?>
         <div class="blog-items items-leading <?php echo $this->params->get('blog_class_leading'); ?>">
             <?php foreach ($this->lead_items as &$item) : ?>
-                <div class="blog-item"
+                <div class="card"
                     itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
                         <?php
                         $this->item = & $item;
@@ -44,10 +44,12 @@ defined('_JEXEC') or die;
         <?php foreach ($this->intro_items as $key => &$item) : ?>
             <div class="blog-item"
                 itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+                    <div class="card">
                     <?php
                     $this->item = & $item;
                     echo $this->loadTemplate('item');
                     ?>
+                    </div>
             </div>
         <?php endforeach; ?>
         </div>
