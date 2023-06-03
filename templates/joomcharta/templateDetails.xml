@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="template" client="site" method="upgrade">
 	<name>joomcharta</name>
-	<version>1.21</version>
-	<creationDate>April 2023</creationDate>
-	<author>Your Name</author>
-	<authorEmail>Your Email</authorEmail>
+	<version>0.90</version>
+	<creationDate>July 2023</creationDate>
+	<author>Kevin Olson</author>
+	<authorEmail>noreply@kevinsguides.com</authorEmail>
 	<copyright>(C) 2023 KG</copyright>
 	<description>TPL_JOOMCHARTA_XML_DESCRIPTION</description>
 	<inheritable>1</inheritable>
@@ -14,6 +14,8 @@
 		<filename>templateDetails.xml</filename>
 		<folder>html</folder>
 		<folder>language</folder>
+		<folder>includes</folder>
+
 	</files>
 	<media destination="templates/site/joomcharta" folder="media">
 		<folder>js</folder>
