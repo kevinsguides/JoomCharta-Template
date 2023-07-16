@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
 
-    console.log('darklighttoggle.js loaded');
 
     const toggler = document.getElementById('dark-light-toggle');
 
@@ -23,8 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let toggleImgSrc = toggler.children[0].src;
     //remove filename from the path
     toggleImgSrc = toggleImgSrc.substring(0, toggleImgSrc.lastIndexOf('/') + 1);
-
-    console.log('toggleImgSrc: ' + toggleImgSrc);
 
     function setColorMode(color) {
         //set colorMode cookie

@@ -47,6 +47,8 @@ $header_style = $this->params->get('header_style', 'title');
 $header_image = $this->params->get('header_image', '');
 $header_subtext  = $this->params->get('header_subtext', '');
 $header_bg_color = $this->params->get('header_bg_color', 'onwhite');
+$container_boxed = $this->params->get('container_boxed', 1);
+
 
 
 $set_color_mode = $color_mode;
@@ -123,6 +125,15 @@ if ($this->countModules('logindialog')) {
 
 }
 
+$loginDialogBtn = '';
+if($this->countModules('logindialog')){
+    $loginDialogBtn = '<button type="button" class="btn btn-primary" data-bs-toggle="modal" href="#jcLoginModal" id="jcModalLoginToggle">
+    <span class="icon-user icon-fw" aria-hidden="true"></span>
+    '.$loginModalButtonText.'</button>
+    ';
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>" data-bs-theme="<?php echo $set_color_mode;?>">
@@ -142,12 +153,24 @@ if($color_scheme == 'custom'){
 </head>
 
 <body class="site">
-<div class="container p-0 container-fullsite">
-	<header class="bg-light">
-       <?php renderHeader($header_style, $header_image, $sitename, $header_subtext, $header_bg_color) ?>
+
+<?php if ($container_boxed == 1):?>
+<div class="container p-0 bg-light">
+<?php endif;?>
+
+<div class="container-fullsite">
+
+<header class="bg-light position-relative">
+<?php if ($container_boxed == 1):?>
+        <?php echo $loginDialogBtn; ?>
+        <?php endif;?>
+       <?php renderHeader($header_style, $header_image, $sitename, $header_subtext, $header_bg_color, $container_boxed, $loginDialogBtn) ?>
+
+
+
         <!-- Generate a Bootstrap Navbar for the top of our website and put the site title on it -->
         <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
-            <div class="container-fluid">
+            <div class="container">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -166,23 +189,21 @@ if($color_scheme == 'custom'){
         </nav>
                     <!-- Load Breadcrumbs Module if Module Exists -->
                     <?php if ($this->countModules('breadcrumbs')) : ?>
-                <div class="breadcrumbs bg-light">
-                    <jdoc:include type="modules" name="breadcrumbs" style="none" />
+                <div class="breadcrumbs bg-slightly-darker-than-light">
+                    <div class="container"><jdoc:include type="modules" name="breadcrumbs" style="none" /></div>
+                    
                 </div>
             <?php endif; ?>
 
 
-        <?php if ($this->countModules('logindialog')) : ?>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" href="#jcLoginModal" id="jcModalLoginToggle"><span class="icon-user icon-fw" aria-hidden="true"></span> <?php echo $loginModalButtonText; ?></button>
-        <?php endif; ?>
+
         
-    </header>
-
-    <?php if ($this->countModules('hero')): ?>
-                        
+    </header><?php if ($this->countModules('hero')): ?>
+        <div class="container p-0">
         <jdoc:include type="modules" name="hero" style="none" />
+        </div>
     <?php endif; ?>
-
+    <div class="container">
     <div class="row gx-0">
         <div class="col-12 col-lg-<?php echo $layout_main_cols;?> order-<?php echo $layout_main_order;?> ">
         <div class="p-0 p-md-1 p-lg-2">
@@ -202,6 +223,7 @@ if($color_scheme == 'custom'){
             </div>
         <?php endif; ?>
 
+    </div>
     </div>
 
     <!-- Load Footer -->
@@ -239,6 +261,12 @@ if($color_scheme == 'custom'){
     <?php endif;?>
 
 </div>
+
+<?php if ($container_boxed == 1):?>
+    </div>
+<?php endif;?>
+
+
 <?php
 if($color_mode == 'user' && $color_mode_toggle == 1){
     renderColorToggle();

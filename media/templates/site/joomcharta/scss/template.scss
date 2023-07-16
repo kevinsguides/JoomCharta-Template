@@ -58,11 +58,11 @@ main{
 .jc-search-container{
     .btn{
         margin-left: 0.5rem !important;
-        background: var(--jc-secondary-dark);
+        background: var(--jc-primary);
         border-radius: 0;
     }
     .btn:hover{
-        background: var(--bs-secondary);
+        background: var(--jc-primary-dark);
     }
 }
 
