@@ -181,4 +181,10 @@
 			
 		</fields>
 	</config>
+
+
+	<updateservers>
+        <server type="extension" priority="1" name="joomcharta">https://raw.githubusercontent.com/kevinsguides/Joomla-4---JoomCharta-Template/main/updateserver.xml</server>
+    </updateservers>
+
 </extension>
