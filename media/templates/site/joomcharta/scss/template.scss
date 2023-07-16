@@ -58,7 +58,7 @@ main{
 .jc-search-container{
     .btn{
         margin-left: 0.5rem !important;
-        background: #001308;
+        background: var(--jc-secondary-dark);
         border-radius: 0;
     }
     .btn:hover{

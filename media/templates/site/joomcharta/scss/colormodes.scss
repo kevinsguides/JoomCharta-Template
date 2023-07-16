@@ -13,9 +13,7 @@
     --jc-primary-dark: #043d29;
     --jc-primary-light: #3c8a6f;
     --jc-secondary: #2d427a;
-    --jc-secondary-dark: #273866;
-
-    
+    --jc-secondary-dark: #273866;    
 }
 
 
@@ -71,4 +69,22 @@ html[data-bs-theme="dark"]{
     #dark-light-toggle{
         background: #525252;
     }
+}
+
+.text-jc-linkcolor{
+    color: rgb(var(--bs-link-color-rgb)) !important;
+}
+
+
+//special header coloring
+.header-color-onprimary{
+    background-color: var(--jc-primary) !important;
+    color: white !important;
+    .text-jc-linkcolor, a{
+        color: white !important;
+    }
+}
+
+.nav-link{
+    color: white;
 }

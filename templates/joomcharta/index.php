@@ -45,6 +45,8 @@ $color_mode = $this->params->get('color_mode', 'light');
 $color_mode_toggle = $this->params->get('color_mode_toggle', 1);
 $header_style = $this->params->get('header_style', 'title');
 $header_image = $this->params->get('header_image', '');
+$header_subtext  = $this->params->get('header_subtext', '');
+$header_bg_color = $this->params->get('header_bg_color', 'onwhite');
 
 
 $set_color_mode = $color_mode;
@@ -142,7 +144,7 @@ if($color_scheme == 'custom'){
 <body class="site">
 <div class="container p-0 container-fullsite">
 	<header class="bg-light">
-       <?php renderHeader($header_style, $header_image, $sitename) ?>
+       <?php renderHeader($header_style, $header_image, $sitename, $header_subtext, $header_bg_color) ?>
         <!-- Generate a Bootstrap Navbar for the top of our website and put the site title on it -->
         <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
             <div class="container-fluid">

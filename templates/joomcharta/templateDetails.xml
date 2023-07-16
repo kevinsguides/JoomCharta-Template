@@ -56,10 +56,28 @@
 			description="TPL_JOOMCHARTA_HEADER_STYLE_DESC"
 			default="title"
 			>
-			<option value="title">Use Site Title</option>
-			<option value="logo">Use Logo Image</option>
-			<option value="fullimg">Full Width Image</option>
-			<option value="headerMod">Use Header Position Module</option>
+			<option value="title">TPL_JOOMCHARTA_USE_SITETITLE</option>
+			<option value="logo">TPL_JOOMCHARTA_USE_LOGO</option>
+			<option value="fullimg">TPL_JOOMCHARTA_USE_FULLWIDTH</option>
+			<option value="headerMod">TPL_JOOMCHARTA_USE_HEADERMOD</option>
+			</field>
+
+			<field name="header_subtext"
+			type="text"
+			label="TPL_JOOMCHARTA_HEADER_SUBTEXT_LABEL"
+			description="TPL_JOOMCHARTA_HEADER_SUBTEXT_DESC"
+			showon="header_style:title"
+			/>
+
+			<field name="header_bg_color"
+			type="list"
+			label="TPL_JOOMCHARTA_HEADER_BG_COLOR_LABEL"
+			description="TPL_JOOMCHARTA_HEADER_BG_COLOR_DESC"
+			default="onwhite"
+			showon="header_style:title,logo"
+			>
+			<option value="onwhite">TPL_JOOMCHARTA_HEADER_BGCOLOR_ONWHITE</option>
+			<option value="onprimary">TPL_JOOMCHARTA_HEADER_BGCOLOR_ONPRIMARY</option>
 			</field>
 
 			<field name="header_image"
