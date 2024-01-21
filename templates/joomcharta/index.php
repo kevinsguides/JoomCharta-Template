@@ -1,11 +1,10 @@
 <?php
 /**
- * @package     Joomla.Site
- * @subpackage  Templates.j4starter
+ * @package     kevinsguidescom
+ * @subpackage  joomcharta.joomlatemplate
  *
- * @copyright   (C) YEAR Your Name
+ * @copyright   (C) 2024 Kevin Olson
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * This is a heavily stripped down/modified version of the default Cassiopeia template, designed to build new templates off of.
  */
 
 defined('_JEXEC') or die;
@@ -32,10 +31,7 @@ $menu     = $app->getMenu()->getActive();
 $pageclass = $menu !== null ? $menu->getParams()->get('pageclass_sfx', '') : '';
 
 include_once 'includes/header.php';
-$mediaPath = JURI::root() . 'media/templates/site/joomcharta/';
-
-
-
+$mediaPath = URI::root() . 'media/templates/site/joomcharta/';
 
 
 //Get params from template styling

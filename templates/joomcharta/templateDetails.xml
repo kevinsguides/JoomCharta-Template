@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="template" client="site" method="upgrade">
 	<name>joomcharta</name>
-	<version>1.00</version>
+	<version>1.01</version>
 	<creationDate>July 2023</creationDate>
 	<author>Kevin Olson</author>
 	<authorEmail>noreply@kevinsguides.com</authorEmail>
-	<copyright>(C) 2023 KG</copyright>
+	<copyright>(C) 2024 KG</copyright>
 	<description>TPL_JOOMCHARTA_XML_DESCRIPTION</description>
 	<inheritable>1</inheritable>
 	<files>
@@ -181,6 +181,18 @@
 				type="radio"
 				label="TPL_JOOMCHARTA_CONTAINER_BOXED_LABEL"
 				description="TPL_JOOMCHARTA_CONTAINER_BOXED_DESC"
+				class="btn-group btn-group-yesno"
+				default="1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="com_content">
+				<field name="com_content_use_cards"
+				type="radio"
+				label="TPL_JOOMCHARTA_COM_CONTENT_USE_CARDS_LABEL"
+				description="TPL_JOOMCHARTA_COM_CONTENT_USE_CARDS_DESC"
 				class="btn-group btn-group-yesno"
 				default="1">
 					<option value="0">JNO</option>

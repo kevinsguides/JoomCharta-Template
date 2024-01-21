@@ -31,10 +31,16 @@ $currentDate       = Factory::getDate()->format('Y-m-d H:i:s');
 $isExpired         = !is_null($this->item->publish_down) && $this->item->publish_down < $currentDate;
 $isNotPublishedYet = $this->item->publish_up > $currentDate;
 $isUnpublished     = $this->item->state == ContentComponent::CONDITION_UNPUBLISHED || $isNotPublishedYet || $isExpired;
+
+$joomCharta_params = Factory::getApplication()->getTemplate(true)->params;
+$useCard = $joomCharta_params->get('com_content_use_cards', 1);
+
 ?>
 
+<div class="<?php echo $useCard ? 'card' : ''; ?>" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+
 <?php if ($params->get('show_title')) : ?>
-        <h2 class="card-header" itemprop="headline">
+        <h2 class="<?php echo $useCard ? 'card-header' : ''; ?>" itemprop="headline">
         <?php if ($params->get('link_titles') && $params->get('access-view')) : ?>
             <a class="text-decoration-none" href="<?php echo Route::_(RouteHelper::getArticleRoute($this->item->slug, $this->item->catid, $this->item->language)); ?>" itemprop="url">
                 <?php echo $this->escape($this->item->title); ?>
@@ -46,7 +52,7 @@ $isUnpublished     = $this->item->state == ContentComponent::CONDITION_UNPUBLISH
     <?php endif; ?>
 
 
-<div class="card-img-top">
+<div class="<?php echo $useCard ? 'card-img-top' : ''; ?>">
 <?php echo LayoutHelper::render('joomla.content.intro_image', $this->item); ?>
 </div>
 
@@ -58,7 +64,7 @@ $isUnpublished     = $this->item->state == ContentComponent::CONDITION_UNPUBLISH
         <?php echo LayoutHelper::render('joomla.content.info_block', ['item' => $this->item, 'params' => $params, 'position' => 'above']); ?>
     <?php endif; ?>
 
-<div class="card-body">
+<div class="<?php echo $useCard ? 'card-body' : ''; ?>">
     <?php if ($isUnpublished) : ?>
         <div class="system-unpublished">
     <?php endif; ?>
@@ -96,7 +102,7 @@ $isUnpublished     = $this->item->state == ContentComponent::CONDITION_UNPUBLISH
 
 
 <?php if ($params->get('show_readmore') || $info == 1 || $info == 2) : ?>
-    <div class="card-footer">
+    <div class="<?php echo $useCard ? 'card-footer' : ''; ?>">
     <?php if ($info == 1 || $info == 2) : ?>
         <?php if ($useDefList) : ?>
             <?php echo LayoutHelper::render('joomla.content.info_block', ['item' => $this->item, 'params' => $params, 'position' => 'below']); ?>
@@ -125,6 +131,8 @@ $isUnpublished     = $this->item->state == ContentComponent::CONDITION_UNPUBLISH
         </div>
     <?php endif; ?>
     </div><?php endif;?>
+
+</div>
 
 
 

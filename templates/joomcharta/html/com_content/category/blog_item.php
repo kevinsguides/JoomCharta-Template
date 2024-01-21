@@ -30,8 +30,17 @@ $currentDate   = Factory::getDate()->format('Y-m-d H:i:s');
 $isUnpublished = ($this->item->state == ContentComponent::CONDITION_UNPUBLISHED || $this->item->publish_up > $currentDate)
     || ($this->item->publish_down < $currentDate && $this->item->publish_down !== null);
 
+$joomCharta_params = Factory::getApplication()->getTemplate(true)->params;
+$useCard = $joomCharta_params->get('com_content_use_cards', 1);
+
+
 ?>
-    <?php echo LayoutHelper::render('joomla.content.blog_style_default_item_title', $this->item); ?>
+
+<div class="<?php echo $useCard ? 'card mb-2' : ''; ?>" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+
+<?php echo LayoutHelper::render('joomla.content.blog_style_default_item_title', $this->item); ?>
+
+<?php echo !$useCard ? '<div class="mb-2"></div>' : ''; ?>
 
 <?php echo LayoutHelper::render('joomla.content.intro_image', $this->item); ?>
 
@@ -40,7 +49,7 @@ $isUnpublished = ($this->item->state == ContentComponent::CONDITION_UNPUBLISHED 
 
 
 <?php if ($isUnpublished || $canEdit || ($useDefList && ($info == 0 || $info == 2)) || $params->get('show_tags', 1) && !empty($this->item->tags->itemTags)) : ?>
-<div class="card-info-block bg-subtle">
+<div class="<?php echo $useCard ? 'card-info-block bg-subtle' : '' ;?>">
 <?php if ($isUnpublished) : ?>
         <div class="system-unpublished">
     <?php endif; ?>
@@ -63,7 +72,7 @@ $isUnpublished = ($this->item->state == ContentComponent::CONDITION_UNPUBLISHED 
 <?php endif;?>
 
 
-<div class="card-body">
+<div class="<?php echo $useCard ? 'card-body' : 'pt-1' ;?>">
     
 
     <?php if (!$params->get('show_intro')) : ?>
@@ -81,7 +90,7 @@ $isUnpublished = ($this->item->state == ContentComponent::CONDITION_UNPUBLISHED 
 
 
 <?php if (($info == 1 || $info == 2 )  || ($params->get('show_readmore') && $this->item->readmore)) : ?>
-<div class="card-footer">
+<div class="<?php echo $useCard ? 'card-footer' : '' ;?>">
 <?php if ($info == 1 || $info == 2) : ?>
     
         <?php if ($useDefList) : ?>
@@ -112,3 +121,5 @@ $isUnpublished = ($this->item->state == ContentComponent::CONDITION_UNPUBLISHED 
     <?php if ($isUnpublished) : ?>
         </div>
     <?php endif; ?>
+
+</div>

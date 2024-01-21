@@ -18,6 +18,11 @@ use Joomla\CMS\Layout\LayoutHelper;
 
 $app = Factory::getApplication();
 
+$joomCharta_params = Factory::getApplication()->getTemplate(true)->params;
+$useCard = $joomCharta_params->get('com_content_use_cards', 1);
+$firstCard = true;
+
+
 $this->category->text = $this->category->description;
 $app->triggerEvent('onContentPrepare', [$this->category->extension . '.categories', &$this->category, &$this->params, 0]);
 $this->category->description = $this->category->text;
@@ -82,16 +87,16 @@ $htag    = $this->params->get('show_page_heading') ? 'h2' : 'h1';
     <?php endif; ?>
 
     <?php if (!empty($this->lead_items)) : ?>
-        <div class="com-content-category-blog__items blog-items items-leading <?php echo $this->params->get('blog_class_leading'); ?>">
+
             <?php foreach ($this->lead_items as &$item) : ?>
-                <div class="card com-content-category-blog__item blog-item" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+
                     <?php
                     $this->item = &$item;
                     echo $this->loadTemplate('item');
                     ?>
-                </div>
+
             <?php endforeach; ?>
-        </div>
+
     <?php endif; ?>
 
     <?php if (!empty($this->intro_items)) : ?>
@@ -102,13 +107,12 @@ $htag    = $this->params->get('show_page_heading') ? 'h2' : 'h1';
         <?php endif; ?>
         <div class="com-content-category-blog__items blog-items <?php echo $blogClass; ?>">
         <?php foreach ($this->intro_items as $key => &$item) : ?>
-            <div class="com-content-category-blog__item blog-item card"
-                itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+            
                     <?php
                     $this->item = & $item;
                     echo $this->loadTemplate('item');
                     ?>
-            </div>
+         
         <?php endforeach; ?>
         </div>
     <?php endif; ?>

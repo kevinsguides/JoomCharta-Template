@@ -9,6 +9,12 @@
  */
 
 defined('_JEXEC') or die;
+use Joomla\CMS\Factory;
+
+
+$joomCharta_params = Factory::getApplication()->getTemplate(true)->params;
+$useCard = $joomCharta_params->get('com_content_use_cards', 1);
+$firstCard = true;
 
 ?>
 <div class="blog-featured" itemscope itemtype="https://schema.org/Blog">
@@ -19,17 +25,20 @@ defined('_JEXEC') or die;
         </h1>
     </div>
     <?php endif; ?>
-
     <?php if (!empty($this->lead_items)) : ?>
         <div class="blog-items items-leading <?php echo $this->params->get('blog_class_leading'); ?>">
             <?php foreach ($this->lead_items as &$item) : ?>
-                <div class="card"
-                    itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-                        <?php
-                        $this->item = & $item;
-                        echo $this->loadTemplate('item');
-                        ?>
-                </div>
+                <?php 
+                    if(!$useCard && !$firstCard){
+                        echo '<hr class="m-0 mt-2 mb-2">';
+                    }
+                    $firstCard = false;
+                ?>
+                <?php
+                $this->item = & $item;
+                echo $this->loadTemplate('item');
+                ?>
+
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
@@ -42,15 +51,18 @@ defined('_JEXEC') or die;
         <?php endif; ?>
         <div class="blog-items <?php echo $blogClass; ?>">
         <?php foreach ($this->intro_items as $key => &$item) : ?>
-            <div class="blog-item"
-                itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-                    <div class="card">
+            <?php 
+                    if(!$useCard && !$firstCard){
+                        echo '<hr class="m-0 mt-2 mb-2">';
+                    }
+                    $firstCard = false;
+                ?>
                     <?php
                     $this->item = & $item;
                     echo $this->loadTemplate('item');
                     ?>
-                    </div>
-            </div>
+              
+           
         <?php endforeach; ?>
         </div>
     <?php endif; ?>

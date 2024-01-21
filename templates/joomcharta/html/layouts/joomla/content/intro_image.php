@@ -35,8 +35,10 @@ $layoutAttr = [
         </a>
     <?php else : ?>
         <?php //does layouthelper have a way to add a class to the img tag? ?>
-        
+        <a href="<?php echo Route::_(RouteHelper::getArticleRoute($displayData->slug, $displayData->catid, $displayData->language)); ?>" itemprop="url" title="<?php echo $this->escape($displayData->title); ?>">
+      
         <?php echo LayoutHelper::render('joomla.html.image', array_merge($layoutAttr, ['itemprop' => 'thumbnail'])); ?>
+        </a>
     <?php endif; ?>
     <?php if (isset($images->image_intro_caption) && $images->image_intro_caption !== '') : ?>
         <figcaption class="caption"><?php echo $this->escape($images->image_intro_caption); ?></figcaption>
